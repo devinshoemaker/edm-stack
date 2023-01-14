@@ -233,17 +233,22 @@ const main = async ({ isTypeScript, packageManager, rootDirectory }) => {
 
   await Promise.all(fileOperationPromises);
 
-  execSync(pm.run("setup"), { cwd: rootDirectory, stdio: "inherit" });
-
   execSync(pm.run("format", "--loglevel warn"), {
     cwd: rootDirectory,
     stdio: "inherit",
   });
 
   console.log(
-    `Setup is complete. You're now ready to rock and roll 🤘
-
-Start development with \`${pm.run("dev")}\`
+    `
+Setup is almost complete. Follow these steps to finish initialization:
+- Start the database:
+  ${pm.run("docker")}
+- Run setup (this updates the database):
+  ${pm.run("setup")}
+- Run the first build (this generates the server you will run):
+  ${pm.run("build")}
+- You're now ready to rock and roll 🤘
+  ${pm.run("dev")}
     `.trim()
   );
 };
