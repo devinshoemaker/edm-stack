@@ -10,7 +10,7 @@ npx create-remix@latest --template remix-run/indie-stack
 
 ## What's in the stack
 
-- Production-ready [SQLite Database](https://sqlite.org)
+- Local [PostgreSQL Database](https://www.postgresql.org/) for development
 - [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
 - Email/Password Authentication with [cookie-based sessions](https://remix.run/docs/en/v1/api/remix#createcookiesessionstorage)
 - Database ORM with [Prisma](https://prisma.io)
@@ -31,6 +31,14 @@ Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --
   ```sh
   npx remix init
   ```
+
+- Start the Postgres Database in [Docker](https://www.docker.com/get-started):
+
+  ```sh
+  npm run docker
+  ```
+
+  > **Note:** The npm script will complete while Docker sets up the container in the background. Ensure that Docker has finished and your container is running before proceeding.
 
 - Initial setup: _If you just generated this project, this step has been done for you._
 
@@ -58,10 +66,6 @@ This is a pretty simple note-taking app, but it's a good example of how you can 
 - creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
 - user sessions, and verifying them [./app/session.server.ts](./app/session.server.ts)
 - creating, and deleting notes [./app/models/note.server.ts](./app/models/note.server.ts)
-
-### Connecting to your database
-
-The sqlite database lives at `/data/sqlite.db` in your deployed application. You can connect to the live database by running `fly ssh console -C database-cli`.
 
 ### Getting Help with Deployment
 
